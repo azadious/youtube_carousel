@@ -1,0 +1,23 @@
+#youtube_carousel_display_block .youtube_block {
+  position: relative;
+  width: 178px;
+  height: 129px;
+  background-color: white;
+  float: left;
+  margin: 0px;
+  padding: 5px 0px;
+  -webkit-box-shadow: #999999 0px 0px 5px;
+  -moz-box-shadow: #999999 0px 0px 5px;
+  box-shadow: #999999 0px 0px 5px;
+}
+#youtube_carousel_display_block .youtube_block .youtube_link {
+  display: none;
+}
+#youtube_carousel_display_block .youtube_block .thumnail_image img {
+  margin: 0 auto;
+  display: block;
+}
+#youtube_carousel_display_block .youtube_block .description {
+  position: absolute;
+  padding: 5px 0 0 6px;
+}

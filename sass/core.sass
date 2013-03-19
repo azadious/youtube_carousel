@@ -1,0 +1,32 @@
+@import compass/css3/box-shadow
+
+#youtube_carousel_display_block 
+	overflow: hidden
+	background: gray
+
+	.youtube_block 
+		position: relative
+		width: 178px
+		height: 129px
+		background-color: #ffffff 
+		float: left
+		margin: 0px
+		padding: 5px 0px
+		+box-shadow(#999999 0px 0px 5px)
+
+		.youtube_link 
+			display: none
+
+		.thumnail_image img
+			margin: 0 auto
+			display: block
+			
+		.description 
+			position: absolute
+			padding: 5px 0 0 6px
+	
+	.youtube_block.selected
+		@extend .youtube_block
+		color: red
+		 	
+	
