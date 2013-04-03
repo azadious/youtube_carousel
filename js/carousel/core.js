@@ -1,50 +1,74 @@
-// Youtube Carousel 
-var Carousel_model = Backbone.Model.extend({
-	
-	defaults: {
-		slide_display: 5,
-		slide_speed: 10000, //sec
-		slide_stop: 5, //sec
-		slide_delay: 5000,
-		block_width : parseInt($('.youtube_block').css('width'))
-	} ,
+//Core
 
-	initialize: function() { 
-	
-		/*
-		for(i=0;i<this.get('block_width');i++) {
-			$('.youtube_block').eq(0).css('margin-left',-i);	
-		}
-		*/
-	
-		//$('.youtube_block').eq(2).addClass('selected');		
-		
-		//$('.youtube_block').eq(4).delay(this.get('slide_speed')).fadeOut(1000);
+//Box Size
+var youtubeBlockWidth = $('.youtube_block').width(); 
+var youtubeBlockMargin = parseInt($('.youtube_block').css('margin-right')); 
+var easingMethod = 'easeOutBack';
+var boxSize = youtubeBlockWidth+youtubeBlockMargin;
+var numberOfBox = $('.youtube_block').length;
+var lastBoxPosition = numberOfBox*boxSize;
 
-	} ,
-	
-	move: function() {
-		
+//Time 
+var moveSpeed = 1000;
+var displayTime = 3000;
+
+//Set Default position
+function setPosition() {
+	for(i=0;i<numberOfBox;i++){
+		var position = i*boxSize;
+		if(position == 0) { position = 1;}
+		$('.youtube_block').eq(i).css('left',position);
+		console.log('setposition');
 	}
-	
-	//$('.youtube_block').eq(2).addClass('selected');
-});
+}
 
-var Carousel_view = Backbone.View.extend({
+//Move box
+function moveBox() {
+	var moveBox = 1;
+	for(i=0;i<numberOfBox;i++){
+		var leftPosition = parseInt($('.youtube_block').eq(i).css('left'));
+		moveTo = leftPosition + 1 - (youtubeBlockWidth+youtubeBlockMargin)*moveBox;
+		
+		if(moveTo >= 0) {
+			//other image
+			$('.youtube_block').eq(i).animate({
+				left: moveTo
+			}, {
+				duration: moveSpeed , easing: easingMethod
+			});	
+		}else {
+			//first image
+			//move to left
+			$('.youtube_block').eq(i).animate({
+				left: moveTo	
+			}, {
+				duration: moveSpeed/2 , easing: easingMethod
+			});
+			
+			//move to last position
+			$('.youtube_block').eq(i).animate({
+				left: lastBoxPosition
+			}, {
+				duration: 0 , easing: easingMethod
+			});
+			
+			//move to left
+			$('.youtube_block').eq(i).animate({
+				left: lastBoxPosition - (youtubeBlockWidth+youtubeBlockMargin)*moveBox
+			}, {
+				duration: moveSpeed/2 , easing: easingMethod
+			});
+		}	
+	}
+}
 
-	model: Carousel_model ,
-	
-	initialize: function() {
-	
-		$('.youtube_block').animate(
-			{right: Carousel_model.get('block_width') },Carousel_model.get('slide_speed'),'linear' ,
-			function() {	
-		});
+var callbacks = $.Callbacks();
 
-	},
-	
-});
+//Set Position
+callbacks.add(setPosition);
+callbacks.fire();
+callbacks.remove(setPosition);
 
+setInterval(moveBox,displayTime);
 
-var youtube_carousel = new Carousel_view;
-
+//If position in negative value move to max 
