@@ -2,15 +2,19 @@
 
 #youtube_carousel_display_block 
 	overflow: hidden
-	background: gray
-
+	position: relative
+	height: 200px
+	padding: 10px
+	top: 100px
+	left: 100px
+	
 	.youtube_block 
-		position: relative
+		position: absolute
 		width: 178px
 		height: 129px
 		background-color: #ffffff 
 		float: left
-		margin: 0px
+		margin: 0px 25px 0 0
 		padding: 5px 0px
 		+box-shadow(#999999 0px 0px 5px)
 
@@ -24,9 +28,14 @@
 		.description 
 			position: absolute
 			padding: 5px 0 0 6px
+			color: #666666
+			font-family: tahoma
+			font-size: 13px
 	
 	.youtube_block.selected
 		@extend .youtube_block
 		color: red
+		width: 495px
+		height: 355px 
 		 	
 	
