@@ -17,7 +17,7 @@ var youtubeFocusTop = $('.youtube_block.focus').css('top');
 
 //Time 
 var moveSpeedDefault = 1000;
-var displayTime = 3000;
+var displayTime = 5000;
 var easingMethod = 'easeOutBack';
 
 //System Var
@@ -164,7 +164,7 @@ $('.youtube_block').on("click", function(){
 		);
 		callbacks.remove(moveBox);
 	} else if($('.youtube_block:animated').length == 0) {
-		callbacks.add(moveBox);
+		callbacks.remove(moveBox);
 		moveBox(500);
 	}
 	
