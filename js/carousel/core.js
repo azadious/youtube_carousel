@@ -17,7 +17,7 @@ var youtubeFocusTop = $('.youtube_block.focus').css('top');
 
 //Time 
 var moveSpeed = 1000;
-var displayTime = 3000;
+var displayTime = 10000;
 var easingMethod = 'easeOutBack';
 
 //System Var
@@ -42,7 +42,11 @@ function setPosition() {
 }//setPosition
 
 //Move box
-function moveBox() {
+function moveBox(time) {
+	if(time != null) {
+		var duration = time;
+		console.log(time);
+	}
 	var moveBox = 1;
 	var moveTo = 0;
 	for(i=0;i<numberOfBox;i++){
@@ -146,6 +150,7 @@ function start() {
 
 $('.youtube_block').on("click", function(){
 	var position =  parseInt($(this).css('left'));
+	var currentBoxIndex = $(this).index('.youtube_block');
 	if(position == boxSize*(focusBoxIndex) ) {
 		var youtubeLink = $(this).children('.youtube_link').html();
 		youtubeLink = youtubeLink.replace('watch?v=','embed/');
@@ -153,10 +158,9 @@ $('.youtube_block').on("click", function(){
 			'<iframe width="'+youtubeFocusWidth+'" height="'+youtubeFocusHeight+'"'+
 			'src="'+youtubeLink+'" frameborder="0" allowfullscreen></iframe>'
 		);
-	
 		callbacks.remove(moveBox);
 	} else {
-		
+		moveBox();
 	}
 	
 });

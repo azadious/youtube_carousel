@@ -41,6 +41,7 @@
   width: 495px;
   height: 355px;
   top: 50px;
+  overflow: hidden;
 }
 #wrap #youtube_carousel_display_block .youtube_block.focus .thumnail_image img {
   width: 480px;
