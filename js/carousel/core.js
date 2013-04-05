@@ -17,7 +17,7 @@ var youtubeFocusTop = $('.youtube_block.focus').css('top');
 
 //Time 
 var moveSpeed = 1000;
-var displayTime = 10000;
+var displayTime = 3000;
 var easingMethod = 'easeOutBack';
 
 //System Var
