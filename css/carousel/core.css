@@ -1,12 +1,15 @@
-#youtube_carousel_display_block {
+#wrap {
   overflow: hidden;
-  position: relative;
-  height: 200px;
   padding: 10px;
-  top: 100px;
-  left: 100px;
 }
-#youtube_carousel_display_block .youtube_block, #youtube_carousel_display_block .youtube_block.selected {
+#wrap #youtube_carousel_display_block {
+  position: relative;
+  height: 450px;
+  padding: 10px;
+  top: 0px;
+  left: 0px;
+}
+#wrap #youtube_carousel_display_block .youtube_block, #wrap #youtube_carousel_display_block .youtube_block.focus {
   position: absolute;
   width: 178px;
   height: 129px;
@@ -17,23 +20,40 @@
   -webkit-box-shadow: #999999 0px 0px 5px;
   -moz-box-shadow: #999999 0px 0px 5px;
   box-shadow: #999999 0px 0px 5px;
+  top: 150px;
 }
-#youtube_carousel_display_block .youtube_block .youtube_link {
+#wrap #youtube_carousel_display_block .youtube_block .youtube_link {
   display: none;
 }
-#youtube_carousel_display_block .youtube_block .thumnail_image img {
+#wrap #youtube_carousel_display_block .youtube_block .thumnail_image img {
   margin: 0 auto;
   display: block;
 }
-#youtube_carousel_display_block .youtube_block .description {
+#wrap #youtube_carousel_display_block .youtube_block .description {
   position: absolute;
   padding: 5px 0 0 6px;
   color: #666666;
   font-family: tahoma;
   font-size: 13px;
 }
-#youtube_carousel_display_block .youtube_block.selected {
+#wrap #youtube_carousel_display_block .youtube_block.focus {
   color: red;
   width: 495px;
   height: 355px;
+  top: 50px;
+}
+#wrap #youtube_carousel_display_block .youtube_block.focus .thumnail_image img {
+  width: 480px;
+}
+#wrap #youtube_carousel_display_block .youtube_block.focus .description {
+  padding-top: 15px;
+}
+#wrap #youtube_carousel_display_block .youtube_block.focus .play_img {
+  position: relative;
+  top: -180px;
+  left: 210px;
+}
+#wrap #youtube_carousel_display_block .youtube_block.focus iframe {
+  position: relative;
+  top: -395px;
 }

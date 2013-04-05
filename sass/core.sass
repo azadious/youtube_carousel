@@ -1,41 +1,54 @@
 @import compass/css3/box-shadow
-
-#youtube_carousel_display_block 
+#wrap
 	overflow: hidden
-	position: relative
-	height: 200px
 	padding: 10px
-	top: 100px
-	left: 100px
 	
-	.youtube_block 
-		position: absolute
-		width: 178px
-		height: 129px
-		background-color: #ffffff 
-		float: left
-		margin: 0px 25px 0 0
-		padding: 5px 0px
-		+box-shadow(#999999 0px 0px 5px)
-
-		.youtube_link 
-			display: none
-
-		.thumnail_image img
-			margin: 0 auto
-			display: block
-			
-		.description 
+	#youtube_carousel_display_block 
+		position: relative
+		height: 450px
+		padding: 10px
+		top: 0px
+		left: 0px
+		
+		.youtube_block 
 			position: absolute
-			padding: 5px 0 0 6px
-			color: #666666
-			font-family: tahoma
-			font-size: 13px
+			width: 178px
+			height: 129px
+			background-color: #ffffff 
+			float: left
+			margin: 0px 25px 0 0
+			padding: 5px 0px
+			+box-shadow(#999999 0px 0px 5px)
+			top: 150px
+			.youtube_link 
+				display: none
 	
-	.youtube_block.selected
-		@extend .youtube_block
-		color: red
-		width: 495px
-		height: 355px 
-		 	
-	
+			.thumnail_image img
+				margin: 0 auto
+				display: block
+				
+			.description 
+				position: absolute
+				padding: 5px 0 0 6px
+				color: #666666
+				font-family: tahoma
+				font-size: 13px
+		
+		.youtube_block.focus
+			@extend .youtube_block
+			color: red
+			width: 495px
+			height: 355px 
+			top: 50px
+			.thumnail_image img
+				width: 480px
+			.description
+				padding-top: 15px
+			.play_img
+				position: relative
+				top: -180px
+				left: 210px	 	
+			iframe
+				position: relative
+				top: -395px
+		
