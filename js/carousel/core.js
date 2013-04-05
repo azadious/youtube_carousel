@@ -160,6 +160,7 @@ $('.youtube_block').on("click", function(){
 		);
 		callbacks.remove(moveBox);
 	} else {
+		callbacks.remove(moveBox);
 		moveBox();
 	}
 	
