@@ -149,14 +149,14 @@ function start() {
 
 function loop(current,limit) {
 	var current = current;
-	moveBox(500);
+	moveBox(0);
 	current++;
 	if(current > limit) {
 		return;
 	}else {
 		setTimeout( function() {
 			loop(current,limit);
-		} , 1000);
+		} , 200);
 	}
 }
 
