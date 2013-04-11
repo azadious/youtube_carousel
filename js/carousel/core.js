@@ -298,6 +298,6 @@ $('.youtube_block').on("click", function(){
 	
 });
 
-//setInterval(start,displayTime);
+setInterval(start,displayTime);
 
 //If position in negative value move to max 
