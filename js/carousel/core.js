@@ -20,7 +20,7 @@ var youtubeFocusTop = $('.youtube_block.focus').css('top');
 //Time 
 var moveSpeedDefault = 1000;
 var displayTime = 2500;
-var easingMethod = 'linear';
+var easingMethod = 'easeInOutQuad';
 
 //System Var
 var boxSize = youtubeBlockWidth+youtubeBlockMargin;
