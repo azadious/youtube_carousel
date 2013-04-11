@@ -20,7 +20,7 @@ var youtubeFocusTop = $('.youtube_block.focus').css('top');
 //Time 
 var moveSpeedDefault = 1000;
 var displayTime = 2500;
-var easingMethod = 'easeInOutQuad';
+var easingMethod = 'easeOutBack';
 
 //System Var
 var boxSize = youtubeBlockWidth+youtubeBlockMargin;
@@ -141,6 +141,104 @@ function moveBox(time) {
 	}//End for
 }//moveBox
 
+
+//Move box
+function moveBoxToRight(time) {
+	if(time != null) {
+		var moveSpeed = time;
+	}else {
+		moveSpeed = moveSpeedDefault;
+	}
+	if($('.youtube_block:animated').length != 0) {
+		return;
+	}
+	var moveBox = 1;
+	var moveTo = 0;
+	for(i=0;i<numberOfBox;i++){
+		var leftPosition = parseInt($('.youtube_block').eq(i).css('left'));
+		var position = i*boxSize;
+		var positionAfterMiddle = (position+youtubeFocusWidth+youtubeBlockMargin)-boxSize;
+		var moveTo = leftPosition + (youtubeBlockWidth+youtubeBlockMargin)*moveBox;
+		console.log(moveTo);
+		if(moveTo > 1129)  { //last image
+			
+			//move to left
+			$('.youtube_block').eq(i).animate({
+				left: moveTo	
+			}, {
+				duration: moveSpeed/2 , easing: easingMethod
+			});
+			
+			//move to negative position
+			$('.youtube_block').eq(i).animate({
+				left: -boxSize
+			}, {
+				duration: 0 , easing: easingMethod
+			});
+			
+			//move from negative
+			$('.youtube_block').eq(i).animate({
+				left: 0
+			}, {
+				duration: moveSpeed/2 , easing: easingMethod
+			});
+			
+		} else if(moveTo > 0 && moveTo < 406) {
+			//Before Middle box
+			$('.youtube_block').eq(i).animate({
+				left: moveTo
+			}, {
+				duration: moveSpeed , easing: easingMethod
+			});
+			
+		} else if(moveTo > 406 && moveTo < 1332  && moveTo != 609) {
+			//Before Middle box
+			$('.youtube_block').eq(i).animate({
+				left: moveTo
+			}, {
+				duration: moveSpeed , easing: easingMethod
+			});
+			
+		} else if(moveTo >= 0 && moveTo == boxSize*(focusBoxIndex+1) ) {
+			
+			//Middle move
+			$('.youtube_block').eq(i).animate({
+				left: 926 ,
+				top: youtubeBlockTop , 
+				width: youtubeBlockWidth ,
+				height : youtubeBlockHeight
+			},
+				moveSpeed , easingMethod ,
+				function() {
+					$(this).removeClass('focus');
+					$(this).find('.play_img').remove();
+					$(this).children('iframe').remove();
+				}
+			);
+		} else if(moveTo == 406) {
+			
+			//Move to middle
+			$('.youtube_block').eq(i).children('.thumnail_image').children('img').hide();
+			$('.youtube_block').eq(i).children('.description').hide();
+			
+			$('.youtube_block').eq(i).animate({
+				left: boxSize*(focusBoxIndex) ,
+				top: youtubeFocusTop , 
+				width: youtubeFocusWidth ,
+				height : youtubeFocusHeight
+			} ,
+				moveSpeed , easingMethod ,
+				function() {
+					$(this).addClass('focus');
+					$(this).children('.thumnail_image').children('img').fadeIn();
+					$(this).children('.description').fadeIn();
+					$(this).append('<div class="play_img"><img src="img/play-vdo.png" alt="" /></div>');
+				} 
+			);
+		}
+	}//End for
+}//moveBoxToRight
+
 setPosition();
 
 function start() {
@@ -149,14 +247,27 @@ function start() {
 
 function loop(current,limit) {
 	var current = current;
-	moveBox(200);
+	moveBox(500);
 	current++;
 	if(current > limit) {
 		return;
 	}else {
 		setTimeout( function() {
 			loop(current,limit);
-		} , 400);
+		} , 800);
+	}
+}
+
+function loopToRigth(current,limit) {
+	var current = current;
+	moveBoxToRight(500);
+	current++;
+	if(current > limit) {
+		return;
+	}else {
+		setTimeout( function() {
+			loopToRigth(current,limit);
+		} , 800);
 	}
 }
 
@@ -179,14 +290,14 @@ $('.youtube_block').on("click", function(){
 		}else if( currentBoxPosition == 1129){
 			loop(0,1);
 		}else if( currentBoxPosition == 0){
-			loop(0,2);
+			loopToRigth(0,1);
 		}else if( currentBoxPosition == 203){
-			loop(0,3);
+			moveBoxToRight(500);
 		}
 	}
 	
 });
 
-setInterval(start,displayTime);
+//setInterval(start,displayTime);
 
 //If position in negative value move to max 
