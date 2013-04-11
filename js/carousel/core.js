@@ -3,8 +3,10 @@ var displayBox = 5;
 var focusBoxIndex = Math.round(displayBox/2)-1;
 $('.youtube_block').eq(focusBoxIndex).addClass('focus');
 $('.play_img').hide();
+
 $('.youtube_block').eq(focusBoxIndex)
 	.append('<div class="play_img"><img src="img/play-vdo.png" alt="" /></div>');
+
 
 //Box Size
 var youtubeBlockWidth = $('.youtube_block').width();
@@ -17,7 +19,7 @@ var youtubeFocusTop = $('.youtube_block.focus').css('top');
 
 //Time 
 var moveSpeedDefault = 1000;
-var displayTime = 3000;
+var displayTime = 2500;
 var easingMethod = 'easeOutBack';
 
 //System Var
@@ -58,12 +60,6 @@ function moveBox(time) {
 		var position = i*boxSize;
 		var positionAfterMiddle = (position+youtubeFocusWidth+youtubeBlockMargin)-boxSize;
 		var moveTo = leftPosition - (youtubeBlockWidth+youtubeBlockMargin)*moveBox;
-		
-		if(i == focusBoxIndex) {
-			//console.log(boxSize*(focusBoxIndex-1));
-		}else {
-			//console.log(moveTo);	
-		}
 		
 		if(moveTo < 0)  { //first image
 			
@@ -117,7 +113,7 @@ function moveBox(time) {
 				moveSpeed , easingMethod ,
 				function() {
 					$(this).removeClass('focus');
-					$('.play_img').remove();
+					$(this).find('.play_img').remove();
 					$(this).children('iframe').remove();
 				}
 			);
@@ -141,7 +137,6 @@ function moveBox(time) {
 					$(this).append('<div class="play_img"><img src="img/play-vdo.png" alt="" /></div>');
 				} 
 			);
-			
 		}
 	}//End for
 }//moveBox
@@ -150,6 +145,19 @@ setPosition();
 
 function start() {
 	callbacks.fire();
+}
+
+function loop(current,limit) {
+	var current = current;
+	moveBox(500);
+	current++;
+	if(current > limit) {
+		return;
+	}else {
+		setTimeout( function() {
+			loop(current,limit);
+		} , 1000);
+	}
 }
 
 $('.youtube_block').on("click", function(){
@@ -165,7 +173,18 @@ $('.youtube_block').on("click", function(){
 		callbacks.remove(moveBox);
 	} else if($('.youtube_block:animated').length == 0) {
 		callbacks.remove(moveBox);
-		moveBox(500);
+		//moveBox(500);
+		//console.log($(this).css('left'));
+		var currentBoxPosition = parseInt($(this).css('left'));
+		if( currentBoxPosition == 926){
+			moveBox(500);
+		}else if( currentBoxPosition == 1129){
+			loop(0,1);
+		}else if( currentBoxPosition == 0){
+			loop(0,2);
+		}else if( currentBoxPosition == 203){
+			loop(0,3);
+		}
 	}
 	
 });
