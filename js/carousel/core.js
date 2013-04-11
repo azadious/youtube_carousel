@@ -149,14 +149,14 @@ function start() {
 
 function loop(current,limit) {
 	var current = current;
-	moveBox(0);
+	moveBox(200);
 	current++;
 	if(current > limit) {
 		return;
 	}else {
 		setTimeout( function() {
 			loop(current,limit);
-		} , 200);
+		} , 400);
 	}
 }
 
@@ -173,8 +173,6 @@ $('.youtube_block').on("click", function(){
 		callbacks.remove(moveBox);
 	} else if($('.youtube_block:animated').length == 0) {
 		callbacks.remove(moveBox);
-		//moveBox(500);
-		//console.log($(this).css('left'));
 		var currentBoxPosition = parseInt($(this).css('left'));
 		if( currentBoxPosition == 926){
 			moveBox(500);
